@@ -91,7 +91,11 @@ async function requestAPI<T = any>(
             // alert error
           }
           if (data.data) {
-            return { ...data, statusCode: res.status };
+            return {
+              ...data,
+              statusCode: res.status,
+              success: res.status === 200,
+            };
           }
           if (data.success || data.message) {
             return {

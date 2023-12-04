@@ -1,10 +1,16 @@
-import { RootStackParamList } from "@/models";
+import { NFTsTabParamList, RootStackParamList } from "@/models";
 import Feeds from "@/screens/Feeds";
+import FeedsByNFTHolders from "@/screens/FeedsByNFTHolders";
+import FeedsByPoapsHolders from "@/screens/FeedsByPoapsHolders";
+import Ethereum from "@/screens/NFTs/Ethereum";
+import Poaps from "@/screens/NFTs/Poaps";
 import Replies from "@/screens/Replies";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const Tab = createMaterialTopTabNavigator<NFTsTabParamList>();
 
 const MyTheme = {
   ...DefaultTheme,
@@ -13,6 +19,19 @@ const MyTheme = {
     background: "#ffffff",
   },
 };
+
+function NFTsTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Ethereum"
+        component={Ethereum}
+        options={{ title: "ETH" }}
+      />
+      <Tab.Screen name="Poaps" component={Poaps} options={{ title: "POAPS" }} />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -27,6 +46,21 @@ export default function App() {
           name="RepliesScreen"
           component={Replies}
           options={{ title: "Conversation" }}
+        />
+        <Stack.Screen
+          name="NFTsTab"
+          component={NFTsTabs}
+          options={{ title: "NFTs" }}
+        />
+        <Stack.Screen
+          name="FeedsByNFTScreen"
+          component={FeedsByNFTHolders}
+          options={{ title: "NFT Holders" }}
+        />
+        <Stack.Screen
+          name="FeedsByPoapsScreen"
+          component={FeedsByPoapsHolders}
+          options={{ title: "Poap Holders" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

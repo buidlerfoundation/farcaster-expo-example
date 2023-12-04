@@ -1,63 +1,57 @@
-import {
-  View,
-  FlatList,
-  SafeAreaView,
-  ActivityIndicator,
-  Button,
-} from "react-native";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import { View, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import api from "@/api";
 import CastItem from "@/components/CastItem";
 import { ICast, RootStackParamList } from "@/models";
 import Spinner from "@/components/Spinner";
 
-const Feeds = () => {
+const FeedsByNFTHolders = () => {
+  const route = useRoute<RouteProp<RootStackParamList, "FeedsByNFTScreen">>();
+  const address = useMemo(() => route.params?.address, [route.params?.address]);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
-  const [trendingFeeds, setTrendingFeeds] = useState<ICast[]>([]);
+  const [saveFids, setSaveFids] = useState("");
+  const [feeds, setFeeds] = useState<ICast[]>([]);
   const [next, setNext] = useState("");
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const fetchFeeds = useCallback(async () => {
+    if (!address) return;
     setLoading(true);
-    const res = await api.getTrendingFeeds();
+    const holders = await api.getFidsWhoOwnNFT(address);
+    const fids = holders.data?.TokenBalances?.TokenBalance?.map(
+      (item) => item.owner.socials?.[0]?.userId || ""
+    )
+      .filter((item) => !!item)
+      .join(",");
+    setSaveFids(fids);
+    const res = await api.getUserFeeds(fids);
     if (res.success) {
-      setTrendingFeeds(res.data?.casts);
+      setFeeds(res.data?.casts);
       setNext(res.data?.next?.cursor);
     }
     setLoading(false);
-  }, []);
-  const goToNFTsTab = useCallback(() => {
-    navigation.navigate("NFTsTab");
-  }, [navigation]);
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => <Button onPress={goToNFTsTab} title="NFTs" />,
-    });
-  }, [goToNFTsTab, navigation]);
+  }, [address]);
   useEffect(() => {
     fetchFeeds();
   }, [fetchFeeds]);
   const onEndReached = useCallback(() => {
-    if (!next || loadMore) return;
+    if (!next || loadMore || !saveFids) return;
     setLoadMore(true);
     api
-      .getTrendingFeeds(next)
+      .getUserFeeds(saveFids, next)
       .then((res) => {
         if (res.success) {
-          setTrendingFeeds((current) => [
-            ...current,
-            ...(res.data?.casts || []),
-          ]);
+          setFeeds((current) => [...current, ...(res.data?.casts || [])]);
           setNext(res.data?.next?.cursor);
         }
       })
       .finally(() => {
         setLoadMore(false);
       });
-  }, [loadMore, next]);
+  }, [loadMore, next, saveFids]);
   const onItemPress = useCallback(
     (cast: ICast) => {
       navigation.navigate("RepliesScreen", { hash: cast.thread_hash });
@@ -70,7 +64,7 @@ const Feeds = () => {
         <Spinner />
       ) : (
         <FlatList
-          data={trendingFeeds}
+          data={feeds}
           keyExtractor={(cast) => cast.hash}
           renderItem={({ item }) => (
             <CastItem cast={item} onPress={onItemPress} />
@@ -95,4 +89,4 @@ const Feeds = () => {
   );
 };
 
-export default memo(Feeds);
+export default memo(FeedsByNFTHolders);

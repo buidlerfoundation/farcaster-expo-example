@@ -1,6 +1,14 @@
 export type RootStackParamList = {
   FeedsScreen: undefined;
   RepliesScreen?: { hash: string };
+  NFTsTab: undefined;
+  FeedsByNFTScreen?: { address: string };
+  FeedsByPoapsScreen?: { eventId: string };
+};
+
+export type NFTsTabParamList = {
+  Ethereum: undefined;
+  Poaps: undefined;
 };
 
 export interface BaseDataApi<T> {
@@ -123,4 +131,26 @@ export interface IFeedApiData {
   next: {
     cursor: string;
   };
+}
+
+export interface INFTsEthereum {
+  amount: string;
+  tokenAddress: string;
+  tokenId: string;
+  tokenNfts: {
+    contentValue: { image?: { small: string } };
+    metaData: { name: string; description: string };
+  };
+}
+
+export interface IPoapEvent {
+  city: string;
+  contentValue: {
+    image?: {
+      small: string;
+    };
+  };
+  eventId: string;
+  eventName: string;
+  eventURL: string;
 }
