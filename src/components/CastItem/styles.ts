@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  root: {
+    // paddingHorizontal: 15,
+    // paddingVertical: 12,
+  },
   container: {
     flexDirection: "row",
     paddingHorizontal: 15,
@@ -48,6 +52,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 16,
     marginLeft: 10,
+  },
+  replies: {
+    paddingLeft: 15,
   },
 });
 

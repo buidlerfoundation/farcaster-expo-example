@@ -20,35 +20,37 @@ const CastItem = ({ cast, onPress }: ICastItem) => {
   }, [cast, onPress]);
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={styles.root}
       disabled={!onPress}
       onPress={onItemPress}
     >
-      <Image source={{ uri: cast.author.pfp_url }} style={styles.avatar} />
-      <View style={styles.contentWrap}>
-        <View style={styles.nameWrap}>
-          <Text style={styles.name}>{cast.author.display_name}</Text>
-          <Text style={styles.username}>
-            @{cast.author.username} • {moment(cast.timestamp).fromNow(true)}
-          </Text>
-        </View>
-        <RenderHTML html={normalizeContentCast(cast)} />
-        <View style={styles.reactions}>
-          <View style={styles.reactionItem}>
-            <IconLike />
-            <Text style={styles.reactionCount}>
-              {cast.reactions.likes?.length}
+      <View style={styles.container}>
+        <Image source={{ uri: cast.author.pfp_url }} style={styles.avatar} />
+        <View style={styles.contentWrap}>
+          <View style={styles.nameWrap}>
+            <Text style={styles.name}>{cast.author.display_name}</Text>
+            <Text style={styles.username}>
+              @{cast.author.username} • {moment(cast.timestamp).fromNow(true)}
             </Text>
           </View>
-          <View style={styles.reactionItem}>
-            <IconReply />
-            <Text style={styles.reactionCount}>{cast.replies?.count}</Text>
-          </View>
-          <View style={styles.reactionItem}>
-            <IconRecast />
-            <Text style={styles.reactionCount}>
-              {cast.reactions.recasts?.length}
-            </Text>
+          <RenderHTML html={normalizeContentCast(cast)} />
+          <View style={styles.reactions}>
+            <View style={styles.reactionItem}>
+              <IconLike />
+              <Text style={styles.reactionCount}>
+                {cast.reactions.likes?.length}
+              </Text>
+            </View>
+            <View style={styles.reactionItem}>
+              <IconReply />
+              <Text style={styles.reactionCount}>{cast.replies?.count}</Text>
+            </View>
+            <View style={styles.reactionItem}>
+              <IconRecast />
+              <Text style={styles.reactionCount}>
+                {cast.reactions.recasts?.length}
+              </Text>
+            </View>
           </View>
         </View>
       </View>

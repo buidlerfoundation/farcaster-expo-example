@@ -61,3 +61,18 @@ export const normalizeContentCastV1 = (cast: ICastV1) => {
   });
   return `<div class='message-text'>${res}</div>`;
 };
+
+export const normalizeAllCasts = (casts: ICastV1[]) => {
+  const res = [];
+  const map: { [key: string]: ICastV1 } = {};
+  casts.forEach((cast) => {
+    cast.castReplies = [];
+    map[cast.hash] = cast;
+    if (cast.parentHash) {
+      map[cast.parentHash].castReplies.push(cast);
+    } else {
+      res.push(cast);
+    }
+  });
+  return res;
+};

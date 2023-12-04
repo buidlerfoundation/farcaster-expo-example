@@ -92,6 +92,7 @@ export interface ICastV1 {
   replies?: {
     count?: number;
   };
+  castReplies?: ICastV1[];
 }
 
 export interface ICast {
