@@ -45,12 +45,21 @@ const Feeds = () => {
         setLoadMore(false);
       });
   }, [loadMore, next]);
+  const onItemPress = useCallback(
+    (cast: ICast) => {
+      navigation.navigate("RepliesScreen", { hash: cast.thread_hash });
+    },
+    [navigation],
+  );
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         data={trendingFeeds}
         keyExtractor={(cast) => cast.hash}
-        renderItem={({ item }) => <CastItem cast={item} />}
+        renderItem={({ item }) => (
+          <CastItem cast={item} onPress={onItemPress} />
+        )}
+        initialNumToRender={10}
         onEndReached={onEndReached}
         ItemSeparatorComponent={() => (
           <View

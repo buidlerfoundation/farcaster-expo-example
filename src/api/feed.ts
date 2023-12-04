@@ -1,4 +1,4 @@
-import { IFeedApiData } from "@/models";
+import { ICastV1, IFeedApiData } from "@/models";
 import ApiCaller from "./ApiCaller";
 
 export const getTrendingFeeds = (cursor?: string) => {
@@ -12,4 +12,11 @@ export const getTrendingFeeds = (cursor?: string) => {
     q.append("cursor", cursor);
   }
   return ApiCaller.get<IFeedApiData>(`farcaster/feed?${q}`);
+};
+
+export const getAllCastsFromHash = (hash: string) => {
+  return ApiCaller.get<{ result: { casts: ICastV1[] } }>(
+    `farcaster/all-casts-in-thread?threadHash=${hash}&viewerFid=3`,
+    "https://api.neynar.com/v1/"
+  );
 };

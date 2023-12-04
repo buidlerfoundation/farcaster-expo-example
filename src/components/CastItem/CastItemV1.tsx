@@ -1,20 +1,20 @@
-import { ICast } from "@/models";
+import { ICastV1 } from "@/models";
 import React, { memo, useCallback } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import moment from "moment";
 import RenderHTML from "../RenderHTML";
-import { normalizeContentCast } from "@/helpers/CastHelpers";
+import { normalizeContentCastV1 } from "@/helpers/CastHelpers";
 import IconLike from "../SVG/IconLike";
 import IconReply from "../SVG/IconReply";
 import IconRecast from "../SVG/IconRecast";
 
-interface ICastItem {
-  cast: ICast;
-  onPress?: (cast: ICast) => void;
+interface ICastItemV1 {
+  cast: ICastV1;
+  onPress?: (cast: ICastV1) => void;
 }
 
-const CastItem = ({ cast, onPress }: ICastItem) => {
+const CastItemV1 = ({ cast, onPress }: ICastItemV1) => {
   const onItemPress = useCallback(() => {
     onPress?.(cast);
   }, [cast, onPress]);
@@ -24,21 +24,19 @@ const CastItem = ({ cast, onPress }: ICastItem) => {
       disabled={!onPress}
       onPress={onItemPress}
     >
-      <Image source={{ uri: cast.author.pfp_url }} style={styles.avatar} />
+      <Image source={{ uri: cast.author.pfp?.url }} style={styles.avatar} />
       <View style={styles.contentWrap}>
         <View style={styles.nameWrap}>
-          <Text style={styles.name}>{cast.author.display_name}</Text>
+          <Text style={styles.name}>{cast.author?.displayName}</Text>
           <Text style={styles.username}>
             @{cast.author.username} • {moment(cast.timestamp).fromNow(true)}
           </Text>
         </View>
-        <RenderHTML html={normalizeContentCast(cast)} />
+        <RenderHTML html={normalizeContentCastV1(cast)} />
         <View style={styles.reactions}>
           <View style={styles.reactionItem}>
             <IconLike />
-            <Text style={styles.reactionCount}>
-              {cast.reactions.likes?.length}
-            </Text>
+            <Text style={styles.reactionCount}>{cast.reactions?.count}</Text>
           </View>
           <View style={styles.reactionItem}>
             <IconReply />
@@ -46,9 +44,7 @@ const CastItem = ({ cast, onPress }: ICastItem) => {
           </View>
           <View style={styles.reactionItem}>
             <IconRecast />
-            <Text style={styles.reactionCount}>
-              {cast.reactions.recasts?.length}
-            </Text>
+            <Text style={styles.reactionCount}>{cast?.recasts?.count}</Text>
           </View>
         </View>
       </View>
@@ -56,4 +52,4 @@ const CastItem = ({ cast, onPress }: ICastItem) => {
   );
 };
 
-export default memo(CastItem);
+export default memo(CastItemV1);

@@ -23,7 +23,11 @@ export default function App() {
           component={Feeds}
           options={{ title: "Trending" }}
         />
-        <Stack.Screen name="RepliesScreen" component={Replies} />
+        <Stack.Screen
+          name="RepliesScreen"
+          component={Replies}
+          options={{ title: "Conversation" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

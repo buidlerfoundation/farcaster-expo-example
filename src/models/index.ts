@@ -38,6 +38,62 @@ export interface IReaction {
   fname?: string;
 }
 
+export interface IUserV1 {
+  fid: number;
+  custodyAddress?: string;
+  username?: string;
+  displayName?: string;
+  pfp?: {
+    url?: string;
+  };
+  profile?: {
+    bio?: {
+      text?: string;
+      mentionedProfiles: IUserV1[];
+    };
+  };
+  followerCount?: number;
+  followingCount?: number;
+  verifications: string[];
+  activeStatus: string;
+}
+
+export interface ICastV1 {
+  hash?: string;
+  parentHash?: string;
+  parentUrl?: string;
+  threadHash?: string;
+  parentAuthor?: {
+    fid?: string;
+  };
+  author: IUserV1;
+  text?: string;
+  timestamp?: string;
+  embeds?: [
+    {
+      url?: string;
+    },
+  ];
+  mentionedProfiles?: IUserV1[];
+  reactions?: {
+    count?: number;
+    fids?: number[];
+    fnames?: string[];
+  };
+  recasts?: {
+    count?: number;
+    fids?: number[];
+  };
+  recasters?: string[];
+  viewerContext?: {
+    liked?: boolean;
+    recasted?: boolean;
+  };
+  replies?: {
+    count?: number;
+  };
+}
+
 export interface ICast {
   object?: string;
   hash?: string;

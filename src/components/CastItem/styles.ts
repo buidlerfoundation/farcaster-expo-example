@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
   nameWrap: {
     flexDirection: "row",
     alignItems: "center",
+    flexWrap: "wrap",
+    gap: 5,
   },
   name: {
     fontWeight: "700",
@@ -26,7 +28,6 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   username: {
-    marginLeft: 5,
     color: "#666666",
     fontSize: 15,
     lineHeight: 18,
