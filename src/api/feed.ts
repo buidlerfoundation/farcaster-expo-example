@@ -5,7 +5,7 @@ export const getAirStackPoaps = () => {
   const query = `
   query MyQuery {
     Poaps(
-      input: {filter: {owner: {_eq: "fc_fname:vitalik.eth"}}, blockchain: ALL, limit: 20}
+      input: {filter: {owner: {_eq: "fc_fname:dwr.eth"}}, blockchain: ALL, limit: 20}
     ) {
       Poap {
         poapEvent {
@@ -43,7 +43,7 @@ export const getAirStackNFTEthereum = () => {
   const query = `
   query MyQuery {
     Ethereum: TokenBalances(
-      input: {filter: {owner: {_eq: "fc_fname:vitalik.eth"}, tokenType: {_in: [ERC721]}}, blockchain: ethereum, limit: 50}
+      input: {filter: {owner: {_eq: "fc_fname:dwr.eth"}, tokenType: {_in: [ERC721]}}, blockchain: ethereum, limit: 100}
     ) {
       TokenBalance {
         amount

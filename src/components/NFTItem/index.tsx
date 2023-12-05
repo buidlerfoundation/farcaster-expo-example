@@ -3,11 +3,11 @@ import {
   ImageBackground,
   Text,
   TouchableOpacity,
-  View,
   useWindowDimensions,
 } from "react-native";
 import styles from "./styles";
 import { INFTsEthereum } from "@/models";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface INFTItem {
   item: INFTsEthereum;
@@ -29,11 +29,14 @@ const NFTItem = ({ item, onPress }: INFTItem) => {
         style={styles.container}
         source={{ uri: item.tokenNfts.contentValue.image?.small }}
       >
-        <View style={styles.mask}>
-          <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+        <LinearGradient
+          colors={["rgba(0,0,0,0)", "rgba(0,0,0,.8)"]}
+          style={styles.mask}
+        >
+          <Text style={styles.name} numberOfLines={5} ellipsizeMode="tail">
             {item.tokenNfts.metaData.name}
           </Text>
-        </View>
+        </LinearGradient>
       </ImageBackground>
     </TouchableOpacity>
   );

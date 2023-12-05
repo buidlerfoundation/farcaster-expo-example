@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { IPoapEvent } from "@/models";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface IPoapItem {
   item: IPoapEvent;
@@ -29,12 +30,14 @@ const PoapItem = ({ item, onPress }: IPoapItem) => {
         style={styles.container}
         source={{ uri: item.contentValue.image?.small }}
       >
-        <View style={styles.mask}>
-          <Text style={styles.tokenId}>#{item.eventId}</Text>
+        <LinearGradient
+          colors={["rgba(0,0,0,0)", "rgba(0,0,0,.8)"]}
+          style={styles.mask}
+        >
           <Text style={styles.name} numberOfLines={5} ellipsizeMode="tail">
             {item.eventName}
           </Text>
-        </View>
+        </LinearGradient>
       </ImageBackground>
     </TouchableOpacity>
   );

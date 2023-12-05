@@ -15,9 +15,12 @@ const Ethereum = () => {
   const [data, setData] = useState<INFTsEthereum[]>([]);
   const onItemPress = useCallback(
     (item: INFTsEthereum) => {
-      navigation.navigate("FeedsByNFTScreen", { address: item.tokenAddress });
+      navigation.navigate("FeedsByNFTScreen", {
+        address: item.tokenAddress,
+        title: `${item.tokenNfts.metaData.name} holders`,
+      });
     },
-    [navigation],
+    [navigation]
   );
   useEffect(() => {
     setLoading(true);
@@ -38,7 +41,7 @@ const Ethereum = () => {
         <FlatList
           data={normalizeNFTCollection(data)}
           style={{ padding: 7.5 }}
-          keyExtractor={(item) => item.tokenId}
+          keyExtractor={(item) => item.tokenAddress + item.tokenId}
           numColumns={2}
           renderItem={({ item }) => (
             <NFTItem item={item} onPress={onItemPress} />

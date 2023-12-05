@@ -69,7 +69,7 @@ const RenderHTML = ({
     () => ({
       "message-text": {
         whiteSpace: "pre",
-        color: "#000000",
+        color: "#ffffff",
         fontSize: 15,
         lineHeight: 24,
         marginTop: 5,

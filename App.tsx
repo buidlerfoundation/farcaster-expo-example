@@ -8,15 +8,19 @@ import Replies from "@/screens/Replies";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "react-native";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createMaterialTopTabNavigator<NFTsTabParamList>();
 
 const MyTheme = {
   ...DefaultTheme,
+  dark: true,
   colors: {
     ...DefaultTheme.colors,
-    background: "#ffffff",
+    background: "#000000",
+    card: "#000000",
+    text: "#ffffff",
   },
 };
 
@@ -35,34 +39,47 @@ function NFTsTabs() {
 
 export default function App() {
   return (
-    <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="FeedsScreen"
-          component={Feeds}
-          options={{ title: "Trending" }}
-        />
-        <Stack.Screen
-          name="RepliesScreen"
-          component={Replies}
-          options={{ title: "Conversation" }}
-        />
-        <Stack.Screen
-          name="NFTsTab"
-          component={NFTsTabs}
-          options={{ title: "NFTs" }}
-        />
-        <Stack.Screen
-          name="FeedsByNFTScreen"
-          component={FeedsByNFTHolders}
-          options={{ title: "NFT Holders" }}
-        />
-        <Stack.Screen
-          name="FeedsByPoapsScreen"
-          component={FeedsByPoapsHolders}
-          options={{ title: "Poap Holders" }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <StatusBar barStyle="light-content" />
+      <NavigationContainer theme={MyTheme}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="FeedsScreen"
+            component={Feeds}
+            options={{
+              title: "Trending",
+            }}
+          />
+          <Stack.Screen
+            name="RepliesScreen"
+            component={Replies}
+            options={{
+              title: "Conversation",
+            }}
+          />
+          <Stack.Screen
+            name="NFTsTab"
+            component={NFTsTabs}
+            options={{
+              title: "Filter",
+            }}
+          />
+          <Stack.Screen
+            name="FeedsByNFTScreen"
+            component={FeedsByNFTHolders}
+            options={{
+              title: "NFT Holders",
+            }}
+          />
+          <Stack.Screen
+            name="FeedsByPoapsScreen"
+            component={FeedsByPoapsHolders}
+            options={{
+              title: "Poap Holders",
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }

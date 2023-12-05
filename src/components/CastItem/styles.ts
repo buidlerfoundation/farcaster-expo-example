@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     borderRadius: 22.5,
+    backgroundColor: "#242424",
   },
   contentWrap: {
     marginLeft: 10,
@@ -27,12 +28,12 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: "700",
-    color: "#000000",
+    color: "#ffffff",
     fontSize: 15,
     lineHeight: 18,
   },
   username: {
-    color: "#666666",
+    color: "#acacac",
     fontSize: 15,
     lineHeight: 18,
   },
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   reactionCount: {
-    color: "#949494",
+    color: "#616164",
     fontWeight: "500",
     fontSize: 13,
     lineHeight: 16,

@@ -10,6 +10,7 @@ import Spinner from "@/components/Spinner";
 const FeedsByPoapsHolders = () => {
   const route = useRoute<RouteProp<RootStackParamList, "FeedsByPoapsScreen">>();
   const eventId = useMemo(() => route.params?.eventId, [route.params?.eventId]);
+  const title = useMemo(() => route.params?.title, [route.params?.title]);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
   const [saveFids, setSaveFids] = useState("");
@@ -34,6 +35,11 @@ const FeedsByPoapsHolders = () => {
     }
     setLoading(false);
   }, [eventId]);
+  useEffect(() => {
+    if (title) {
+      navigation.setOptions({ title });
+    }
+  }, [navigation, title]);
   useEffect(() => {
     fetchFeeds();
   }, [fetchFeeds]);
@@ -73,7 +79,7 @@ const FeedsByPoapsHolders = () => {
           onEndReached={onEndReached}
           ItemSeparatorComponent={() => (
             <View
-              style={{ height: 1, backgroundColor: "#f3f3f3", width: "100%" }}
+              style={{ height: 1, backgroundColor: "#242424", width: "100%" }}
             />
           )}
           ListFooterComponent={

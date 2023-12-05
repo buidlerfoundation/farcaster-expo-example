@@ -2,7 +2,7 @@
   "expo": {
     "name": "FarcasterFeed",
     "slug": "FarcasterFeed",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hungnb.farcasterfeed"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,6 +29,11 @@
     },
     "experiments": {
       "tsconfigPaths": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e2b47e26-1c1f-48c2-9c9b-85e8b2d11f4a"
+      }
     }
   }
 }

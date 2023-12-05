@@ -18,7 +18,10 @@ const Poaps = () => {
   >([]);
   const onItemPress = useCallback(
     (item: IPoapEvent) => {
-      navigation.navigate("FeedsByPoapsScreen", { eventId: item.eventId });
+      navigation.navigate("FeedsByPoapsScreen", {
+        eventId: item.eventId,
+        title: `${item.eventName} holders`,
+      });
     },
     [navigation]
   );

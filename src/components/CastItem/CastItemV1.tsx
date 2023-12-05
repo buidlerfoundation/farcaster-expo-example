@@ -25,13 +25,28 @@ interface ICastItemV1 {
 const CastItemV1 = ({ cast, style, header }: ICastItemV1) => {
   const showReplies = useMemo(
     () => !header && cast?.castReplies?.length > 0,
-    [cast?.castReplies?.length, header],
+    [cast?.castReplies?.length, header]
   );
   if (!cast) return null;
   return (
     <View style={[styles.root, style]}>
       <View style={styles.container}>
-        <Image source={{ uri: cast.author.pfp?.url }} style={styles.avatar} />
+        <View>
+          <Image source={{ uri: cast.author.pfp?.url }} style={styles.avatar} />
+          {showReplies && (
+            <View
+              style={{
+                width: 10,
+                borderLeftWidth: 2,
+                borderColor: "#242424",
+                flex: 1,
+                alignSelf: "center",
+                borderBottomLeftRadius: 20,
+                marginBottom: -25,
+              }}
+            />
+          )}
+        </View>
         <View style={styles.contentWrap}>
           <View style={styles.nameWrap}>
             <Text style={styles.name}>{cast.author?.displayName}</Text>

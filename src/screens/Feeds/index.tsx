@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   Button,
+  Image,
 } from "react-native";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -34,7 +35,19 @@ const Feeds = () => {
   }, [navigation]);
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Button onPress={goToNFTsTab} title="NFTs" />,
+      headerRight: () => <Button onPress={goToNFTsTab} title="Filter" />,
+      headerLeft: () => (
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            width: 40,
+            height: 40,
+          }}
+        >
+          <Image source={require("@/assets/images/ic_fc.png")} />
+        </View>
+      ),
     });
   }, [goToNFTsTab, navigation]);
   useEffect(() => {
@@ -79,7 +92,7 @@ const Feeds = () => {
           onEndReached={onEndReached}
           ItemSeparatorComponent={() => (
             <View
-              style={{ height: 1, backgroundColor: "#f3f3f3", width: "100%" }}
+              style={{ height: 1, backgroundColor: "#242424", width: "100%" }}
             />
           )}
           ListFooterComponent={

@@ -1,4 +1,10 @@
-import { View, FlatList, SafeAreaView, ActivityIndicator } from "react-native";
+import {
+  View,
+  FlatList,
+  SafeAreaView,
+  ActivityIndicator,
+  Text,
+} from "react-native";
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -10,6 +16,7 @@ import Spinner from "@/components/Spinner";
 const FeedsByNFTHolders = () => {
   const route = useRoute<RouteProp<RootStackParamList, "FeedsByNFTScreen">>();
   const address = useMemo(() => route.params?.address, [route.params?.address]);
+  const title = useMemo(() => route.params?.title, [route.params?.title]);
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
   const [saveFids, setSaveFids] = useState("");
@@ -34,6 +41,11 @@ const FeedsByNFTHolders = () => {
     }
     setLoading(false);
   }, [address]);
+  useEffect(() => {
+    if (title) {
+      navigation.setOptions({ title });
+    }
+  }, [navigation, title]);
   useEffect(() => {
     fetchFeeds();
   }, [fetchFeeds]);
@@ -73,7 +85,7 @@ const FeedsByNFTHolders = () => {
           onEndReached={onEndReached}
           ItemSeparatorComponent={() => (
             <View
-              style={{ height: 1, backgroundColor: "#f3f3f3", width: "100%" }}
+              style={{ height: 1, backgroundColor: "#242424", width: "100%" }}
             />
           )}
           ListFooterComponent={

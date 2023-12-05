@@ -39,13 +39,13 @@ const Replies = () => {
           ListHeaderComponent={
             <CastItemV1
               cast={casts?.[0]}
-              style={{ borderBottomWidth: 1, borderColor: "#f3f3f3" }}
+              style={{ borderBottomWidth: 1, borderColor: "#242424" }}
               header
             />
           }
           ItemSeparatorComponent={() => (
             <View
-              style={{ height: 1, backgroundColor: "#f3f3f3", width: "100%" }}
+              style={{ height: 1, backgroundColor: "#242424", width: "100%" }}
             />
           )}
         />

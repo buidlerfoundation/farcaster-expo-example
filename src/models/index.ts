@@ -2,8 +2,8 @@ export type RootStackParamList = {
   FeedsScreen: undefined;
   RepliesScreen?: { hash: string };
   NFTsTab: undefined;
-  FeedsByNFTScreen?: { address: string };
-  FeedsByPoapsScreen?: { eventId: string };
+  FeedsByNFTScreen?: { address: string; title: string };
+  FeedsByPoapsScreen?: { eventId: string; title: string };
 };
 
 export type NFTsTabParamList = {
