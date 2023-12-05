@@ -8,6 +8,7 @@ import { normalizeContentCast } from "@/helpers/CastHelpers";
 import IconLike from "../SVG/IconLike";
 import IconReply from "../SVG/IconReply";
 import IconRecast from "../SVG/IconRecast";
+import IconActiveBadge from "../SVG/IconActiveBadge";
 
 interface ICastItem {
   cast: ICast;
@@ -29,6 +30,7 @@ const CastItem = ({ cast, onPress }: ICastItem) => {
         <View style={styles.contentWrap}>
           <View style={styles.nameWrap}>
             <Text style={styles.name}>{cast.author.display_name}</Text>
+            {cast.author.active_status === "active" && <IconActiveBadge />}
             <Text style={styles.username}>
               @{cast.author.username} • {moment(cast.timestamp).fromNow(true)}
             </Text>
