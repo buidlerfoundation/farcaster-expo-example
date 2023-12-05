@@ -55,6 +55,7 @@ export default function App() {
             component={Replies}
             options={{
               title: "Conversation",
+              headerBackTitle: "Back",
             }}
           />
           <Stack.Screen
